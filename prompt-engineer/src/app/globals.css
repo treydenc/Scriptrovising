@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: "Times New Roman";
+  src: url("https://db.onlinewebfonts.com/t/32441506567156636049eb850b53f02a.eot");
+  src: url("https://db.onlinewebfonts.com/t/32441506567156636049eb850b53f02a.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/32441506567156636049eb850b53f02a.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/32441506567156636049eb850b53f02a.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/32441506567156636049eb850b53f02a.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/32441506567156636049eb850b53f02a.svg#Times New Roman")format("svg");
+}
+
+@font-face {
+  font-family: "Garamond";
+  src: url("https://db.onlinewebfonts.com/t/2596224269750e00c3ad5356299a3b9f.eot");
+  src: url("https://db.onlinewebfonts.com/t/2596224269750e00c3ad5356299a3b9f.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/2596224269750e00c3ad5356299a3b9f.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/2596224269750e00c3ad5356299a3b9f.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/2596224269750e00c3ad5356299a3b9f.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/2596224269750e00c3ad5356299a3b9f.svg#Ogg Roman")format("svg");
+}
+
+@font-face {
+  font-family: "Grillages";
+  src: url("https://db.onlinewebfonts.com/t/00dd609da9143be366f7cf9bdab6e747.eot");
+  src: url("https://db.onlinewebfonts.com/t/00dd609da9143be366f7cf9bdab6e747.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/00dd609da9143be366f7cf9bdab6e747.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/00dd609da9143be366f7cf9bdab6e747.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/00dd609da9143be366f7cf9bdab6e747.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/00dd609da9143be366f7cf9bdab6e747.svg#Grillages")format("svg");
+}
+
+@font-face {
+  font-family: "Exodus";
+  src: url("https://db.onlinewebfonts.com/t/1a8b65a4ba2c9c91d59926675a3846a6.eot");
+  src: url("https://db.onlinewebfonts.com/t/1a8b65a4ba2c9c91d59926675a3846a6.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/1a8b65a4ba2c9c91d59926675a3846a6.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/1a8b65a4ba2c9c91d59926675a3846a6.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/1a8b65a4ba2c9c91d59926675a3846a6.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/1a8b65a4ba2c9c91d59926675a3846a6.svg#Exodus - Personal Use Striped")format("svg");
+}
+
+@font-face {
+  font-family: "Chromate";
+  src: url("https://db.onlinewebfonts.com/t/0eb5925135317fd82b5cdf5adbf62918.eot");
+  src: url("https://db.onlinewebfonts.com/t/0eb5925135317fd82b5cdf5adbf62918.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/0eb5925135317fd82b5cdf5adbf62918.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/0eb5925135317fd82b5cdf5adbf62918.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/0eb5925135317fd82b5cdf5adbf62918.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/0eb5925135317fd82b5cdf5adbf62918.svg#Chromate")format("svg");
+}
+
+@font-face {
+  font-family: "Caslon";
+  src: url("https://db.onlinewebfonts.com/t/22bd8660c8d0b70ac3e9d024f7f2c31d.eot");
+  src: url("https://db.onlinewebfonts.com/t/22bd8660c8d0b70ac3e9d024f7f2c31d.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/22bd8660c8d0b70ac3e9d024f7f2c31d.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/22bd8660c8d0b70ac3e9d024f7f2c31d.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/22bd8660c8d0b70ac3e9d024f7f2c31d.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/22bd8660c8d0b70ac3e9d024f7f2c31d.svg#Caslon")format("svg");
+}
+
+@font-face {
+  font-family: "Future";
+  src: url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.eot");
+  src: url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.svg#Futura Bold")format("svg");
+}
