@@ -1,32 +1,40 @@
-// src/components/ui/slider.js
-"use client"
+"use client";
 
-import * as React from "react"
-import * as SliderPrimitive from "@radix-ui/react-slider"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import { cn } from "@/lib/utils";
 
-const Slider = React.forwardRef(({ className, ...props }, ref) => (
-  <SliderPrimitive.Root
-    ref={ref}
-    className={cn(
-      "relative flex w-full touch-none select-none items-center",
-      className
-    )}
-    {...props}
-  >
-    <SliderPrimitive.Track 
-      className="relative h-2 w-full grow overflow-hidden rounded-full bg-slate-700/50"
+// Define the type for the component props
+type SliderProps = React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> & {
+  className?: string; // Optional className for additional styling
+};
+
+// Use React.forwardRef with a proper generic type
+const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, SliderProps>(
+  ({ className, ...props }, ref) => (
+    <SliderPrimitive.Root
+      ref={ref}
+      className={cn(
+        "relative flex w-full touch-none select-none items-center",
+        className
+      )}
+      {...props}
     >
-      <SliderPrimitive.Range 
-        className="absolute h-full bg-blue-600" 
+      <SliderPrimitive.Track
+        className="relative h-2 w-full grow overflow-hidden rounded-full bg-slate-700/50"
+      >
+        <SliderPrimitive.Range
+          className="absolute h-full bg-blue-600"
+        />
+      </SliderPrimitive.Track>
+      <SliderPrimitive.Thumb
+        className="block h-4 w-4 rounded-full border-2 border-blue-600 bg-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-50"
       />
-    </SliderPrimitive.Track>
-    <SliderPrimitive.Thumb 
-      className="block h-4 w-4 rounded-full border-2 border-blue-600 bg-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-50" 
-    />
-  </SliderPrimitive.Root>
-))
+    </SliderPrimitive.Root>
+  )
+);
 
-Slider.displayName = SliderPrimitive.Root.displayName
+// Set displayName to ensure proper debugging in React DevTools
+Slider.displayName = SliderPrimitive.Root.displayName;
 
-export { Slider }
+export { Slider };
