@@ -2,9 +2,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import CharacterPanel from '@/components/CharacterPanel';
+import CharacterPanel from '@/components/characterPanel';
 import { defaultSceneData } from '@/data/default';
-import { generateDialogue } from '@/services/dialogueApi';
+import { generateDialogue } from '@/services/dialogueAPI';
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
