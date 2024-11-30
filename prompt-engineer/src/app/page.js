@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function Home() {
   // Check if the component is mounted
@@ -35,12 +36,21 @@ return (
       <div className="relative min-h-screen flex items-center justify-center"> 
         <div className="container mx-auto px-8">
           {/* Main Title */}
-          <div className="text-center mb-16 space-y-6">
+          <div className="flex flex-col items-center justify-center text-center pb-10 space-y-2">
+            <Image 
+              src="/images/strings-logo.png" 
+              alt="Strings Logo" 
+              width={90} 
+              height={90}
+              className="object-contain"
+            />
+
             <h1 className="font-['Garamond'] text-7xl font-light mb-4 bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">
               STRINGS
             </h1>
-            <p className="font-['Garamond'] text-2xl text-gray-400 max-w-2xl mx-auto italic">
-            AI System for Tailored Real-time Interactive Narrative Generation and Scriptwriting
+
+            <p className="font-['Garamond'] text-2xl text-gray-400 max-w-2xl italic">
+              AI System for Tailored Real-time Interactive Narrative Generation and Scriptwriting
             </p>
           </div>
 
@@ -49,7 +59,7 @@ return (
             {/* Normal Mode */}
             <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm hover:bg-black/40 transition-all duration-300">
               <CardHeader className="space-y-4">
-                <CardTitle className="font-['Caslon'] text-3xl text-gray-100">Normal Mode</CardTitle>
+                <CardTitle className="font-['Caslon'] text-3xl text-gray-100">Script Mode 1</CardTitle>
                 <CardDescription className="font-['Garamond'] text-lg text-gray-300">
                   A streamlined approach to character dialogue, perfect for rapid story development and natural conversational flow.
                 </CardDescription>
@@ -65,7 +75,7 @@ return (
                   <Button 
                     className="w-full group bg-white/10 hover:bg-white/20 text-gray-100 border border-gray-500/30 font-['Garamond'] text-lg h-12"
                   >
-                    Normal Mode
+                    Mode 1
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
@@ -75,7 +85,7 @@ return (
             {/* Fine Grain Mode */}
             <Card className="bg-black/30 border-gray-800/50 backdrop-blur-sm hover:bg-black/40 transition-all duration-300">
               <CardHeader className="space-y-4">
-                <CardTitle className="font-['Caslon'] text-3xl text-gray-100">Fine Grain Mode</CardTitle>
+                <CardTitle className="font-['Caslon'] text-3xl text-gray-100">Script Mode 2</CardTitle>
                 <CardDescription className="font-['Garamond'] text-lg text-gray-300">
                   An intricate approach to character development, offering precise control over personality and interaction.
                 </CardDescription>
@@ -91,7 +101,7 @@ return (
                   <Button 
                     className="w-full group bg-white/10 hover:bg-white/20 text-gray-100 border border-gray-500/30 font-['Garamond'] text-lg h-12"
                   >
-                    Fine Grain Mode
+                    Mode 2
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

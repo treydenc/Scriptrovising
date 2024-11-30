@@ -1,15 +1,18 @@
-// src/services/dialogueApi.js
 export async function generateDialogue({
   speakingCharacter,
   otherCharacter,
   sceneDescription,
-  plotLine
+  plotLine,
+  responseLength, // Add this parameter
+  dialogueHistory  // Add this parameter
 }) {
   console.log('Sending data to API:', {
     speakingCharacter,
     otherCharacter,
     sceneDescription,
-    plotLine
+    plotLine,
+    responseLength,
+    dialogueHistory
   });
 
   try {
@@ -22,7 +25,9 @@ export async function generateDialogue({
         speakingCharacter,
         otherCharacter,
         sceneDescription,
-        plotLine
+        plotLine,
+        responseLength,
+        dialogueHistory
       })
     });
 
@@ -45,6 +50,7 @@ export async function generateScene({
   sceneDescription,
   plotPoint
 }) {
+  // This function remains unchanged
   console.log('Generating scene for plot point:', plotPoint);
 
   try {

@@ -1,4 +1,3 @@
-// src/app/api/generate-dialogue/route.js
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -11,21 +10,32 @@ export async function POST(request) {
       speakingCharacter,
       otherCharacter,
       sceneDescription,
-      plotLine
+      plotLine,
+      responseLength,
+      dialogueHistory
     } = await request.json();
 
-    console.log('API received request:', {
-      speakingCharacter,
-      otherCharacter,
-      sceneDescription,
-      plotLine
-    });
+    const systemPrompt = `You are a dialogue generator for a scene between ${speakingCharacter.name} and ${otherCharacter.name}. 
+Your task is to generate the next line of dialogue that continues the existing conversation naturally. On a scale of 0 to 100, where 0 is extremely concise and 100 is highly detailed, your response length should be ${responseLength}. 
+Generate a single line of dialogue that ${speakingCharacter.name} would say to ${otherCharacter.name}
 
-    const systemPrompt = `You are a dialogue generator for a scene between two characters.
-Generate a single line of realistic dialogue that ${speakingCharacter.name} would say to ${otherCharacter.name}.`;
+Key guidelines:
+- Response length: ${responseLength}/100 (0=extremely concise, 100=highly detailed)
+- Maintain conversational continuity with the previous dialogue
+- Consider character attributes and current emotional states
+- Ensure the response directly addresses or follows from the last spoken lines
+- Keep the character's voice consistent`;
 
-const userPrompt = `Scene Context: ${sceneDescription}
+const userPrompt = `On a scale of 0 to 100, where 0 is extremely concise and 100 is highly detailed, your response length should be ${responseLength}. 
+Generate a single line of dialogue that ${speakingCharacter.name} would say to ${otherCharacter.name} Scene Context: ${sceneDescription}
 Plot Development: ${plotLine}
+
+Previous Conversation:
+${dialogueHistory?.length > 0 
+  ? dialogueHistory.map(line => 
+      `${line.character === 'character1' ? speakingCharacter.name : otherCharacter.name}: ${line.text}`
+    ).join('\n')
+  : 'No previous dialogue'}
 
 Speaking Character (${speakingCharacter.name}):
 Current State: ${speakingCharacter.description}
@@ -37,9 +47,7 @@ Current Attributes:
 Other Character (${otherCharacter.name}):
 Current State: ${otherCharacter.description}
 
-Generate only the dialogue line that ${speakingCharacter.name} would say next. Do not include character names or quotation marks. NO quotation marks at all!`;
-
-    console.log('Sending prompt to OpenAI:', { systemPrompt, userPrompt });
+Based on the previous conversation, generate ${speakingCharacter.name}'s next line of dialogue. Do not include character names or quotation marks.`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4",
@@ -48,12 +56,10 @@ Generate only the dialogue line that ${speakingCharacter.name} would say next. D
         { role: "user", content: userPrompt }
       ],
       temperature: 0.7,
-      max_tokens: 100
+      max_tokens: Math.max(30, Math.floor(responseLength * 1.5))  // Scale tokens with response length
     });
 
     const dialogue = completion.choices[0].message.content.trim();
-    console.log('Generated dialogue:', dialogue);
-
     return Response.json({ dialogue });
     
   } catch (error) {
