@@ -125,7 +125,7 @@ export default function Home() {
     <motion.main 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen custom-scrollbar bg-gradient-to-b from-black to-gray-9006 pt-24"
+      className="min-h-screen custom-scrollbar bg-gradient-to-b from-black to-gray-900 pt-24"
     >
       <div className="container max-w-[1920px] mx-auto">
 
@@ -155,7 +155,7 @@ export default function Home() {
               </div>
           </div>
           
-          <Card className="flex flex-col bg-black/30 border-gray-800/50 custom-scrollbar shadow-2xl h-[calc(100vh-120px)]"> {/* Fixed height */}
+          <Card className="flex flex-col bg-black/35 border-transparent custom-scrollbar shadow-2xl h-[calc(100vh-120px)]">
             <CardHeader className="flex-none space-y-2">
               <h2 className="text-3xl font-bold text-gray-200 text-center font-['Caslon']">SCRIPT</h2>
             </CardHeader>
