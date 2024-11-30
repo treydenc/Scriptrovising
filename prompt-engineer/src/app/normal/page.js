@@ -139,7 +139,7 @@ return (
         
         <CardContent className="space-y-2 flex-1 flex flex-col">
           {/* Scene Setting - Compact */}
-          <div className="flex-none">
+          {/* <div className="flex-none">
             <h3 className="font-['Caslon'] text-lg font-bold text-gray-200 mb-1">Scene Setting</h3>
             <Textarea
               className="w-full p-2 rounded-lg bg-black/30 text-gray-200 resize-none border-gray-800/50 
@@ -148,11 +148,11 @@ return (
               value={sceneData.scene.description}
               onChange={(e) => handleSceneUpdate({ description: e.target.value })}
             />
-          </div>
+          </div> */}
 
         {/* Screenplay Format Dialogue Area */}
         <div className="bg-black/30 rounded-xl p-8 backdrop-blur-sm">
-          <div className="h-[45vh] overflow-y-auto custom-scrollbar space-y-2 font-['Courier'] max-w-4xl mx-auto">
+          <div className="h-[50vh] overflow-y-auto custom-scrollbar space-y-2 font-['Courier'] max-w-4xl mx-auto">
             {sceneData.scene.dialogueLines.map((line, index) => (
               <div key={index} className="relative group">
                 {/* Character Name - Centered */}

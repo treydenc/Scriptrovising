@@ -78,7 +78,7 @@ export default function Header() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 rounded-full bg-transparent hover:bg-white/10 transition-colors"
+                className="p-2 rounded-full bg-transparent transition-colors"
               >
                 <HomeIcon className="w-5 h-5 text-gray-200 opacity-80" />
               </motion.div>

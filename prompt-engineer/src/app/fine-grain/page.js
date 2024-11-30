@@ -155,7 +155,7 @@ export default function Home() {
               </div>
           </div>
           
-          <Card className="flex flex-col bg-black/30 border-gray-800/50 custom-scrollbar backdrop-blur-sm shadow-2xl h-[calc(100vh-120px)]"> {/* Fixed height */}
+          <Card className="flex flex-col bg-black/30 border-gray-800/50 custom-scrollbar shadow-2xl h-[calc(100vh-120px)]"> {/* Fixed height */}
             <CardHeader className="flex-none space-y-2 pb-4">
               <h2 className="text-3xl font-bold text-gray-200 text-center font-['Caslon']">Scene Description</h2>
             </CardHeader>
@@ -172,7 +172,7 @@ export default function Home() {
               
               {/* Dialogue Area - Fixed Height */}
               <div className="flex-1 h-0">
-                <div className="h-full bg-gray-800/50 rounded-lg p-8 overflow-y-auto border border-gray-700/50 backdrop-blur-sm font-mono">
+                <div className="h-full bg-gray-800/50 rounded-lg p-8 overflow-y-auto border border-gray-700/50 font-mono">
                   <div className="space-y-6 max-w-3xl mx-auto">
                     {sceneData.scene.dialogueLines.map((line, index) => (
                       <motion.div 
@@ -222,7 +222,7 @@ export default function Home() {
               <div className="flex-none space-y-2">
                 <h3 className="text-xl font-semibold text-gray-200 font-['Caslon']">Plot Development</h3>
                 <Textarea 
-                  className="w-full p-4 rounded-lg bg-gray-800/50 text-white resize-none border-gray-700 placeholder:text-slate-500"
+                  className="w-full font-['Future'] p-4 rounded-lg bg-gray-800/50 text-white resize-none border-gray-700 placeholder:text-slate-500"
                   placeholder="What happens next in the scene?"
                   value={sceneData.scene.plotLine}
                   onChange={(e) => handleSceneUpdate({ plotLine: e.target.value })}
