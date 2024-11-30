@@ -8,7 +8,7 @@ import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+//import { cn } from "@/lib/utils";
 
 const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }) => {
   const getCharacterImage = (name) => {

@@ -7,12 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { generateScene } from '@/services/sceneAPI';
 import { basicDefaultSceneData } from '@/data/default';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 export default function BasicMode() {
   const [sceneData, setSceneData] = useState(basicDefaultSceneData);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState(null);
+  //const [error, setError] = useState(null);
 
   const handleCharacterUpdate = (characterId, updates) => {
     setSceneData(prev => ({

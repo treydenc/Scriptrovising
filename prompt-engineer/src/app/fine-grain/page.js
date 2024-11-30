@@ -7,7 +7,6 @@ import { defaultSceneData } from '@/data/default';
 import { generateDialogue } from '@/services/dialogueAPI';
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
@@ -49,27 +48,27 @@ export default function Home() {
     }));
   };
 
-  const handleDialogueEdit = (index, newText) => {
-    setSceneData(prev => ({
-      ...prev,
-      scene: {
-        ...prev.scene,
-        dialogueLines: prev.scene.dialogueLines.map((line, i) => 
-          i === index ? { ...line, text: newText } : line
-        )
-      }
-    }));
-  };
+  // const handleDialogueEdit = (index, newText) => {
+  //   setSceneData(prev => ({
+  //     ...prev,
+  //     scene: {
+  //       ...prev.scene,
+  //       dialogueLines: prev.scene.dialogueLines.map((line, i) => 
+  //         i === index ? { ...line, text: newText } : line
+  //       )
+  //     }
+  //   }));
+  // };
 
-  const handleDeleteDialogue = (index) => {
-    setSceneData(prev => ({
-      ...prev,
-      scene: {
-        ...prev.scene,
-        dialogueLines: prev.scene.dialogueLines.filter((_, i) => i !== index)
-      }
-    }));
-  };
+  // const handleDeleteDialogue = (index) => {
+  //   setSceneData(prev => ({
+  //     ...prev,
+  //     scene: {
+  //       ...prev.scene,
+  //       dialogueLines: prev.scene.dialogueLines.filter((_, i) => i !== index)
+  //     }
+  //   }));
+  // };
 
   const handleGenerateDialogue = async (speakingCharacterId) => {
     try {
