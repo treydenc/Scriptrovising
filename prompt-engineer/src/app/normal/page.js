@@ -134,7 +134,7 @@ return (
 
       <Card className="bg-transparent border-transparent flex-1 flex flex-col">
         <CardHeader className="py-2">
-          <h2 className="font-['Caslon'] text-3xl font-bold text-center text-gray-200">Scene</h2>
+          <h2 className="font-['Caslon'] text-3xl font-bold text-center text-gray-200">SCRIPT</h2>
         </CardHeader>
         
         <CardContent className="space-y-2 flex-1 flex flex-col">
@@ -188,7 +188,7 @@ return (
           <div className="flex-none space-y-2 mt-2">
               <h3 className="font-['Caslon'] text-lg font-bold text-gray-200">Plot Development</h3>
               <Textarea
-                className="w-full p-2 rounded-lg bg-black/30 text-gray-200 resize-none border-gray-800/50 
+                className="w-full p-2 rounded-lg bg-black/30 text-gray-200 resize-none border-gray-800/100 
                 focus:border-gray-600 font-['Future'] text-sm h-16"
                 placeholder="Describe the next story beat..."
                 value={sceneData.scene.plotLine}

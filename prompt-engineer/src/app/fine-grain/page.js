@@ -156,23 +156,24 @@ export default function Home() {
           </div>
           
           <Card className="flex flex-col bg-black/30 border-gray-800/50 custom-scrollbar shadow-2xl h-[calc(100vh-120px)]"> {/* Fixed height */}
-            <CardHeader className="flex-none space-y-2 pb-4">
-              <h2 className="text-3xl font-bold text-gray-200 text-center font-['Caslon']">Scene Description</h2>
+            <CardHeader className="flex-none space-y-2">
+              <h2 className="text-3xl font-bold text-gray-200 text-center font-['Caslon']">SCRIPT</h2>
             </CardHeader>
-            
-            <CardContent className="flex flex-col gap-4 overflow-hidden h-[calc(100%-6rem)]"> {/* Fixed height calculation */}
+
+            <CardContent className="flex flex-col gap-2 overflow-hidden h-[calc(100%-6rem)]"> {/* Fixed height calculation */}
+            <h3 className="text-xl font-semibold text-gray-200 font-['Caslon']">Scene Description</h3>
               {/* Scene Description Input */}
               <Textarea
-                className="flex-none w-full p-4 font-['Future'] rounded-lg bg-gray-800/50 text-white resize-none border-gray-700 placeholder:text-slate-500"
+                className="flex-none w-full p-4 font-['Future'] rounded-lg bg-black/30 resize-none text-white resize-none border-gray-800/50 placeholder:text-slate-500"
                 placeholder="Describe the scene setting and context..."
                 value={sceneData.scene.description}
                 onChange={(e) => handleSceneUpdate({ description: e.target.value })}
-                rows={3}
+                rows={1}
               />
               
               {/* Dialogue Area - Fixed Height */}
               <div className="flex-1 h-0">
-                <div className="h-full bg-gray-800/50 rounded-lg p-8 overflow-y-auto border border-gray-700/50 font-mono">
+                <div className="bg-black/30 rounded-xl p-8 backdrop-blur-sm font-mono">
                   <div className="space-y-6 max-w-3xl mx-auto">
                     {sceneData.scene.dialogueLines.map((line, index) => (
                       <motion.div 
@@ -222,11 +223,11 @@ export default function Home() {
               <div className="flex-none space-y-2">
                 <h3 className="text-xl font-semibold text-gray-200 font-['Caslon']">Plot Development</h3>
                 <Textarea 
-                  className="w-full font-['Future'] p-4 rounded-lg bg-gray-800/50 text-white resize-none border-gray-700 placeholder:text-slate-500"
+                  className="w-full font-['Future'] p-4 rounded-lg bg-black/30 resize-none text-white resize-none border-gray-800/50 placeholder:text-slate-500"
                   placeholder="What happens next in the scene?"
                   value={sceneData.scene.plotLine}
                   onChange={(e) => handleSceneUpdate({ plotLine: e.target.value })}
-                  rows={3}
+                  rows={2}
                 />
               </div>
             </CardContent>

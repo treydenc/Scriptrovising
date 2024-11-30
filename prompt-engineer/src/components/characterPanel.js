@@ -69,12 +69,12 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Card className="w-full bg-black/30 border-gray-800/50 backdrop-blur-sm shadow-2xl h-[calc(100vh-120px)] flex flex-col">
+      <Card className="w-full bg-black/30 border-gray-800/50 shadow-2xl h-[calc(100vh-120px)] flex flex-col">
         <CardHeader className="flex-none space-y-4">
           <Input
             value={initialCharacter.name}
             onChange={(e) => handleNameChange(e.target.value)}
-            className="text-2xl text-center font-['Future'] bg-transparent border-gray-700"
+            className="text-2xl text-center font-['Caslon'] bg-transparent border-gray-800/100"
             placeholder="Character Name"
           />
         </CardHeader>
@@ -83,7 +83,7 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
           <div className="space-y-6">
             {/* Character Description */}
             <Textarea
-              className="w-full p-4 font-['Future'] rounded-lg bg-gray-800/50 text-white resize-none border-gray-700 placeholder:text-slate-500"
+              className="w-full p-4 font-['Future'] rounded-lg bg-black/30 resize-none text-white resize-none border-gray-800/100 placeholder:text-slate-500"
               placeholder="Describe the character's current state..."
               value={initialCharacter.description}
               rows={1}
@@ -137,13 +137,13 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
                       type="text"
                       value={data.leftLabel}
                       onChange={(e) => handleLabelChange(category, 'left', e.target.value)}
-                      className="flex-1 text-sm text-gray-400 font-['Future'] bg-gray-800/50 border-gray-700"
+                      className="flex-1 text-sm text-gray-400 font-['Future'] bg-gray-900/50 border-gray-700"
                     />
                     <Input
                       type="text"
                       value={data.rightLabel}
                       onChange={(e) => handleLabelChange(category, 'right', e.target.value)}
-                      className="flex-1 text-sm text-gray-400 font-['Future'] bg-gray-800/50 border-gray-700"
+                      className="flex-1 text-sm text-gray-400 font-['Future'] bg-gray-900/50 border-gray-700"
                     />
                   </div>
                   

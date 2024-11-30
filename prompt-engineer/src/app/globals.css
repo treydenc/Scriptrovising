@@ -82,14 +82,13 @@ body {
 
 @font-face {
   font-family: "Future";
-  src: url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.eot");
-  src: url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.eot?#iefix")format("embedded-opentype"),
-  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.woff2")format("woff2"),
-  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.ttf")format("truetype"),
-  url("https://db.onlinewebfonts.com/t/9ab8abd11c40ee5c8d1905f9c9cb9ac8.svg#Futura Bold")format("svg");
+  src: url("https://db.onlinewebfonts.com/t/6901c65d6d291c5e2cbb9b44aaa905f7.eot");
+  src: url("https://db.onlinewebfonts.com/t/6901c65d6d291c5e2cbb9b44aaa905f7.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/6901c65d6d291c5e2cbb9b44aaa905f7.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/6901c65d6d291c5e2cbb9b44aaa905f7.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/6901c65d6d291c5e2cbb9b44aaa905f7.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/6901c65d6d291c5e2cbb9b44aaa905f7.svg#FuturaTEE")format("svg");
 }
-
 
 /* Custom Scrollbar Styles */
 @layer utilities {
