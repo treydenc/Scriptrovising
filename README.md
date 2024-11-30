@@ -49,33 +49,33 @@ Strings is a web application that assists writers in generating dynamic characte
 Follow these steps to get the application up and running:
 
 ### **1. Clone the Repository**
-\`\`\`bash
+```bash
 git clone https://github.com/treydenc/scriptrovising.git
 cd scriptrovising
-\`\`\`
+```
 
 ### **2. Install Dependencies**
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ### **3. Set Up Environment Variables**
-Create a \`.env.local\` file in the project root with the following content:
-\`\`\`env
+Create a `.env.local` file in the project root with the following content:
+```env
 OPENAI_API_KEY=your_api_key_here
-\`\`\`
+```
 
 ### **4. Run the Development Server**
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 The app will be available at \`http://localhost:3000\`.
 
 ---
 
 ## **Project Structure**
-\`\`\`plaintext
+```plaintext
 src/
 ├── app/
 │   ├── page.js          # Landing page
@@ -88,8 +88,7 @@ src/
 │   └── dialogueApi.js   # API integration for OpenAI
 └── lib/
     └── utils.js         # Utility functions
-\`\`\`
-
+```
 ---
 
 ## **Usage**
