@@ -50,8 +50,8 @@ Follow these steps to get the application up and running:
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/treydenc/scriptrovising.git
-cd scriptrovising
+git clone https://github.com/treydenc/string.git
+cd prompt-engineer
 ```
 
 ### **2. Install Dependencies**
@@ -70,7 +70,7 @@ OPENAI_API_KEY=your_api_key_here
 npm run dev
 ```
 
-The app will be available at \`http://localhost:3000\`.
+The app will be available at `http://localhost:3000`.
 
 ---
 
