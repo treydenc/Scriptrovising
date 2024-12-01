@@ -91,6 +91,8 @@ src/
 ├── services/
 │   └── dialogueAPI.js     # API integration for OpenAI
 │   └── sceneAPI.js        # API integration for OpenAI
+├── data/
+│   └── default.js        # API integration for OpenAI
 └── lib/
     └── utils.js           # Utility functions
 .env.local

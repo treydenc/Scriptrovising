@@ -1,3 +1,4 @@
+// src/app/api/generate-scene/route.js
 import OpenAI from "openai";
 import { z } from "zod";
 import { zodResponseFormat } from "openai/helpers/zod";
@@ -6,48 +7,64 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// Define the schema for dialogue lines
+// Define dialogue line schema
 const DialogueLine = z.object({
   character: z.enum(["character1", "character2"]),
   text: z.string(),
   timestamp: z.string()
 });
 
-// Define the scene response schema
+// Define scene response schema
 const SceneResponse = z.object({
   dialogue: z.array(DialogueLine)
 });
 
+// Input validation schema
+const SceneInputSchema = z.object({
+  characters: z.object({
+    character1: z.object({
+      name: z.string(),
+      description: z.string()
+    }),
+    character2: z.object({
+      name: z.string(),
+      description: z.string()
+    })
+  }),
+  sceneDescription: z.string(),
+  plotPoint: z.string(),
+  previousDialogue: z.array(DialogueLine).optional(),
+  previousPlotPoint: z.string().optional()
+});
+
 export async function POST(request) {
   try {
+    const rawData = await request.json();
+    console.log('Received request data:', JSON.stringify(rawData, null, 2));
+
+    // Validate input data
+    const validatedData = SceneInputSchema.parse(rawData);
     const {
       characters,
       sceneDescription,
       plotPoint,
-      previousDialogue,
-      previousPlotPoint
-    } = await request.json();
-
-    // Format previous dialogue for context
-    const previousLines = previousDialogue?.length > 0 
-      ? `Previous Dialogue:\n${previousDialogue
-          .map(line => `${line.character === 'character1' ? characters.character1.name : characters.character2.name}: ${line.text}`)
-          .join('\n')}`
-      : 'No previous dialogue';
+      previousDialogue = [],
+      previousPlotPoint = ''
+    } = validatedData;
 
     const systemPrompt = `You are a dialogue scene generator focused on creating continuous, cohesive dialogue scenes. 
     Your task is to directly continue an ongoing conversation between two characters, ensuring:
     
-    1. Each new line follows DIRECTLY from the last spoken line in the previous dialogue
-    2. Reference specific details and points mentioned in the previous dialogue
-    3. Maintain the ongoing emotional thread and tension
-    4. Keep consistent character voices and personalities
-    5. Generate dialogue that moves toward the plot goal while building on established context
+    1. Each new line follows naturally from the last spoken line
+    2. References specific details from the previous dialogue
+    3. Maintains consistent character voices and personalities
+    4. Advances the plot while staying true to character motivations
+    5. Generate 3-6 exchanges that feel like a natural continuation
     
     Format Requirements:
     - Each line must be a direct response to the previous speaker
     - Character identifiers must be "character1" or "character2"
-    - Generate 3-6 exchanges that feel like a natural continuation`;
+    - Dialogue should feel natural and in-character`;
     
     const userPrompt = `Scene Context: ${sceneDescription}
     
@@ -56,17 +73,17 @@ export async function POST(request) {
     ${characters.character2.name} (character2): ${characters.character2.description}
     
     Previous Exchange:
-    ${previousDialogue?.length > 0 
+    ${previousDialogue.length > 0 
       ? previousDialogue
           .map(line => `${characters[line.character].name}: "${line.text}"`)
           .join('\n')
       : 'Starting conversation'}
     
-    Last Line Spoken: "${previousDialogue?.[previousDialogue.length - 1]?.text || 'None'}"
+    Last Line Spoken: "${previousDialogue[previousDialogue.length - 1]?.text || 'None'}"
+    Previous Plot Point: ${previousPlotPoint || 'None'}
+    Current Plot Point to Address: ${plotPoint}
     
-    Plot Point to Address: ${plotPoint}
-    
-    Generate the next part of this conversation, picking up EXACTLY where the last line left off. The dialogue should feel like a seamless continuation of the existing exchange, particularly responding to Snape's last question about being prepared for the responsibility.`;
+    Generate the next part of this conversation, picking up where the last line left off.`;
 
     console.log('Sending prompt to OpenAI:', { systemPrompt, userPrompt });
 
@@ -93,8 +110,13 @@ export async function POST(request) {
     
   } catch (error) {
     console.error('API Error:', error);
+    // Return a more detailed error response
     return Response.json(
-      { error: error.message || 'Failed to generate scene' },
+      { 
+        error: error.message || 'Failed to generate scene',
+        details: error.errors || error.stack || 'No additional details',
+        receivedData: error.data || 'No data available'
+      },
       { status: 500 }
     );
   }

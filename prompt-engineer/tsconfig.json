@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/fine-grain/page.js", "src/app/layout. js", "src/app/layout.js", "src/components/ui/slider.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(without-header)/fine-grain/page.js", "src/app/layout. js", "src/app/layout.js", "src/components/ui/slider.tsx"],
   "exclude": ["node_modules"]
 }
