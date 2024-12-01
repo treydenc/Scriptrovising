@@ -78,21 +78,29 @@ The app will be available at `http://localhost:3000`.
 ```plaintext
 src/
 ├── app/
-│   ├── page.js            # Landing page
-│   ├── api/               # Normal mode
-|    └── generateDialogue/ # Openai Function
-|    └── generateScene/    # Openai Function
-│   ├── normal/            # Normal mode
-│   └── fine-grain/        # Fine-grain mode
+│   ├── (with-header)/     # Pages with header
+│   │   ├── page.js        # Landing page
+│   │   └── layout.js      # Layout with header
+│   ├── (without-header)/  # Pages without header
+│   │   ├── fine-grain/    # Fine-grain mode
+│   │   │   └── page.js
+│   │   ├── normal/        # Normal mode
+│   │   │   └── page.js
+│   │   └── layout.js      # Layout without header
+│   ├── api/               # API routes
+│   │   ├── generateDialogue/ # OpenAI Function
+│   │   └── generateScene/    # OpenAI Function
+│   ├── layout.js          # Root layout
+│   └── globals.css        # Global styles
 ├── components/
 │   ├── Header.js          # Site header
-│   └── CharacterPanel.js  # Character management panel
-│   └── ui/                # shadcn/ui
+│   ├── CharacterPanel.js  # Character management panel
+│   └── ui/                # shadcn/ui components
 ├── services/
-│   └── dialogueAPI.js     # API integration for OpenAI
+│   ├── dialogueAPI.js     # API integration for OpenAI
 │   └── sceneAPI.js        # API integration for OpenAI
 ├── data/
-│   └── default.js        # API integration for OpenAI
+│   └── default.js         # Default configurations
 └── lib/
     └── utils.js           # Utility functions
 .env.local
