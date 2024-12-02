@@ -33,7 +33,7 @@ export async function POST(request) {
     Your expertise as a screenwriter should be evident in the attention to emotional depth, tension, timing, and subtext that drives great dialogue.`;
     
     
-    const userPrompt = `You are an expert screenwriter creating a single line of dialogue that ${speakingCharacter.name} would say to ${otherCharacter.name}.
+    const userPrompt = `Create a single line of dialogue that ${speakingCharacter.name} would say to ${otherCharacter.name}.
     
     **Scene Context:** ${sceneDescription}
     **Plot Development:** ${plotLine}
