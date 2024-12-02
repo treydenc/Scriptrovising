@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 import DownloadButton from '@/components/DownloadButton';
+import AutoResizeTextArea from '@/components/AutoResizeTextArea';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -229,38 +230,29 @@ export default function Home() {
                   <div className="flex-1 overflow-y-auto p-4 sm:p-8">
                     <div className="space-y-6 max-w-3xl mx-auto">
                       {sceneData.scene.dialogueLines.map((line, index) => (
-                        <motion.div 
-                          key={index}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          className="relative group"
-                        >
-                          <div className="text-center mb-2 text-white/90 font-['Courier']">
-                            {sceneData.characters[line.character].name.toUpperCase()}
+                        <div key={index} className="relative group">
+                          <div className="text-center text-gray-300 mb-2 uppercase font-['Courier']">
+                            {sceneData.characters[line.character].name}
                           </div>
-                          <div className="px-4 sm:px-16">
-                            <textarea
-                              defaultValue={line.text}
-                              onChange={(e) => handleDialogueEdit(index, e.target.value)}
-                              className="w-full bg-transparent font-['Courier'] text-white/90 resize-none 
-                                outline-none focus:ring-1 focus:ring-blue-500/50 rounded px-2 py-1"
-                              rows={Math.ceil(line.text.length / 50)}
-                            />
-                          </div>
-                          <div className="absolute -right-8 sm:-right-12 top-0 opacity-0 
-                            group-hover:opacity-100 transition-opacity">
+                          <div className="relative">
+                            <div className="px-4 sm:px-16">
+                              <AutoResizeTextArea
+                                value={line.text}
+                                onChange={handleDialogueEdit}
+                                index={index}
+                              />
+                            </div>
                             <button
                               onClick={() => handleDeleteDialogue(index)}
-                              className="text-red-400/50 hover:text-red-400 p-1"
+                              className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-2
+                                      opacity-0 group-hover:opacity-100 transition-opacity
+                                      text-red-400/50 hover:text-red-400 p-1 bg-black/20 rounded"
                               title="Delete line"
                             >
                               ×
                             </button>
                           </div>
-                          <div className="absolute -right-12 sm:-right-16 bottom-0 text-[10px] text-white/30">
-                            {line.timestamp}
-                          </div>
-                        </motion.div>
+                        </div>
                       ))}
                       <div ref={dialogueEndRef} className="h-6" />
                     </div>
