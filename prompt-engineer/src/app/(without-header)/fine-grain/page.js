@@ -166,7 +166,7 @@ export default function Home() {
           </Button>
           
           <CardHeader className="flex-none space-y-2 sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2">
-            <h2 className="text-3xl sm:text-3xl font-bold text-gray-200 text-center font-['Caslon'] pt-2">
+            <h2 className="text-4xl sm:text-3xl font-bold text-gray-200 text-center font-['Caslon'] pt-2">
               SCRIPT
             </h2>
           </CardHeader>

@@ -92,7 +92,7 @@ const DownloadButton = ({ dialogueContent, sceneDescription }) => {
     <Button
       onClick={generatePDF}
       variant="outline"
-      className="text-gray-400 hover:text-gray-200 flex items-center gap-2"
+      className="text-gray-400 hover:text-gray-200 flex items-center gap-2 border-transparent"
       disabled={isDownloading}
     >
       <Download size={16} />
