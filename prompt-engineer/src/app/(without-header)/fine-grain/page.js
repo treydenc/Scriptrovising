@@ -215,7 +215,7 @@ export default function Home() {
                   Scene Description
                 </h3>
                 <Textarea
-                  className="w-full p-4 font-['Future'] rounded-lg bg-black/30 resize-none 
+                  className="w-full p-2 font-['Future'] rounded-lg bg-black/30 resize-none 
                     text-white border-gray-800/50 placeholder:text-slate-500"
                   placeholder="Describe the scene setting and context..."
                   value={sceneData.scene.description}
@@ -228,7 +228,7 @@ export default function Home() {
               <div className="flex-1 min-h-0">
                 <div className="bg-black/30 rounded-xl h-full flex flex-col">
                   <div className="flex-1 overflow-y-auto p-4 sm:p-8">
-                    <div className="space-y-6 max-w-3xl mx-auto">
+                    <div className="space-y-6 max-w-4xl mx-auto">
                       {sceneData.scene.dialogueLines.map((line, index) => (
                         <div key={index} className="relative group">
                           <div className="text-center text-gray-300 mb-2 uppercase font-['Courier']">
@@ -266,7 +266,7 @@ export default function Home() {
                   Plot Development
                 </h3>
                 <Textarea 
-                  className="w-full font-['Future'] p-4 rounded-lg bg-black/30 resize-none 
+                  className="w-full font-['Future'] p-2 rounded-lg bg-black/30 resize-none 
                     text-white border-gray-800/50 placeholder:text-slate-500"
                   placeholder="What happens next in the scene?"
                   value={sceneData.scene.plotLine}
