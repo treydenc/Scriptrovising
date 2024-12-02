@@ -155,7 +155,7 @@ export default function Home() {
       className="min-h-screen custom-scrollbar bg-gradient-to-b from-black to-gray-900"
     >
       {/* Navigation Bar - Responsive */}
-      <div className="sticky top-0 z-50 bg-black/50 backdrop-blur-sm p-4">
+      <div className="sticky top-0 z-50 bg-transparent backdrop-blur-sm p-4">
         <div className="container max-w-[1920px] mx-auto flex flex-col sm:flex-row justify-between gap-4">
           <Button
             onClick={clearModeAndReturn}
@@ -271,7 +271,7 @@ export default function Home() {
                   placeholder="What happens next in the scene?"
                   value={sceneData.scene.plotLine}
                   onChange={(e) => handleSceneUpdate({ plotLine: e.target.value })}
-                  rows={2}
+                  rows={1}
                 />
               </div>
             </CardContent>

@@ -116,7 +116,7 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
             />
             
             <motion.div 
-              className="relative aspect-[3/4] w-28 sm:w-40 mx-auto rounded-lg overflow-hidden shadow-xl"
+              className="relative aspect-[3/4] w-12 sm:w-24 mx-auto rounded-lg overflow-hidden shadow-xl"
               whileHover={{ scale: 1.02 }}
             >
               <Image
