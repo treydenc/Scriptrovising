@@ -156,7 +156,7 @@ export default function Home() {
     >
       {/* Navigation Bar - Responsive */}
       <div className="sticky top-0 z-50 bg-transparent backdrop-blur-sm p-4">
-        <div className="container max-w-[1920px] mx-auto flex flex-col sm:flex-row justify-between gap-4">
+        <div className="container max-w-[1920px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <Button
             onClick={clearModeAndReturn}
             variant="ghost"
@@ -164,6 +164,13 @@ export default function Home() {
           >
             ← Back & Clear
           </Button>
+          
+          <CardHeader className="flex-none space-y-2 sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2">
+            <h2 className="text-3xl sm:text-3xl font-bold text-gray-200 text-center font-['Caslon'] pt-2">
+              SCRIPT
+            </h2>
+          </CardHeader>
+
           <DownloadButton 
             dialogueContent={sceneData.scene.dialogueLines.map(line => ({
               character: sceneData.characters[line.character].name,
@@ -201,81 +208,75 @@ export default function Home() {
           </div>
 
           {/* Central Script Area */}
-          <Card className="flex flex-col bg-black/35 border-transparent shadow-2xl lg:h-[calc(100vh-120px)]">
-            <CardHeader className="flex-none space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-200 text-center font-['Caslon']">
-                SCRIPT
-              </h2>
-            </CardHeader>
+            <Card className="flex flex-col bg-black/35 border-transparent shadow-2xl h-[calc(100vh-8rem)]">
+              <CardContent className="flex flex-col gap-4 h-full p-4 sm:p-6">
+                {/* Scene Description */}
+                <div className="flex-none">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-200 font-['Caslon'] mb-2">
+                    Scene Description
+                  </h3>
+                  <Textarea
+                    className="w-full p-2 font-['Future'] rounded-lg bg-black/30 resize-none 
+                      text-white border-gray-800/50 placeholder:text-slate-500"
+                    placeholder="Describe the scene setting and context..."
+                    value={sceneData.scene.description}
+                    onChange={(e) => handleSceneUpdate({ description: e.target.value })}
+                    rows={1}
+                  />
+                </div>
 
-            <CardContent className="flex flex-col gap-4 h-[calc(100%-6rem)] overflow-hidden">
-              {/* Scene Description */}
-              <div className="flex-none">
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-200 font-['Caslon'] mb-2">
-                  Scene Description
-                </h3>
-                <Textarea
-                  className="w-full p-2 font-['Future'] rounded-lg bg-black/30 resize-none 
-                    text-white border-gray-800/50 placeholder:text-slate-500"
-                  placeholder="Describe the scene setting and context..."
-                  value={sceneData.scene.description}
-                  onChange={(e) => handleSceneUpdate({ description: e.target.value })}
-                  rows={1}
-                />
-              </div>
-
-              {/* Dialogue Area */}
-              <div className="flex-1 min-h-0">
-                <div className="bg-black/30 rounded-xl h-full flex flex-col">
-                  <div className="flex-1 overflow-y-auto p-4 sm:p-8">
-                    <div className="space-y-6 max-w-4xl mx-auto">
-                      {sceneData.scene.dialogueLines.map((line, index) => (
-                        <div key={index} className="relative group">
-                          <div className="text-center text-gray-300 mb-2 uppercase font-['Courier']">
-                            {sceneData.characters[line.character].name}
-                          </div>
-                          <div className="relative">
-                            <div className="px-4 sm:px-16">
-                              <AutoResizeTextArea
-                                value={line.text}
-                                onChange={handleDialogueEdit}
-                                index={index}
-                              />
+                {/* Dialogue Area */}
+                <div className="flex-1 min-h-0 relative">
+                  <div className="absolute inset-0 bg-black/30 rounded-xl flex flex-col">
+                    <div className="flex-1 overflow-y-auto p-4 sm:p-8">
+                      <div className="space-y-6 max-w-4xl mx-auto">
+                        {sceneData.scene.dialogueLines.map((line, index) => (
+                          <div key={index} className="relative group">
+                            <div className="text-center text-gray-300 mb-2 uppercase font-['Courier']">
+                              {sceneData.characters[line.character].name}
                             </div>
-                            <button
-                              onClick={() => handleDeleteDialogue(index)}
-                              className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-2
-                                      opacity-0 group-hover:opacity-100 transition-opacity
-                                      text-red-400/50 hover:text-red-400 p-1 bg-black/20 rounded"
-                              title="Delete line"
-                            >
-                              ×
-                            </button>
+                            <div className="relative">
+                              <div className="px-4 sm:px-16">
+                                <AutoResizeTextArea
+                                  value={line.text}
+                                  onChange={handleDialogueEdit}
+                                  index={index}
+                                />
+                              </div>
+                              <button
+                                onClick={() => handleDeleteDialogue(index)}
+                                className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-2
+                                  opacity-0 group-hover:opacity-100 transition-opacity
+                                  text-red-400/50 hover:text-red-400 p-1 bg-black/20 rounded"
+                                title="Delete line"
+                              >
+                                ×
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                      <div ref={dialogueEndRef} className="h-6" />
+                        ))}
+                        <div ref={dialogueEndRef} className="h-6" />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Plot Development */}
-              <div className="flex-none">
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-200 font-['Caslon'] mb-2">
-                  Plot Development
-                </h3>
-                <Textarea 
-                  className="w-full font-['Future'] p-2 rounded-lg bg-black/30 resize-none 
-                    text-white border-gray-800/50 placeholder:text-slate-500"
-                  placeholder="What happens next in the scene?"
-                  value={sceneData.scene.plotLine}
-                  onChange={(e) => handleSceneUpdate({ plotLine: e.target.value })}
-                  rows={1}
-                />
-              </div>
-            </CardContent>
-          </Card>
+                {/* Plot Development */}
+                <div className="flex-none">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-200 font-['Caslon'] mb-2">
+                    Plot Development
+                  </h3>
+                  <Textarea 
+                    className="w-full font-['Future'] p-2 rounded-lg bg-black/30 resize-none 
+                      text-white border-gray-800/50 placeholder:text-slate-500"
+                    placeholder="What happens next in the scene?"
+                    value={sceneData.scene.plotLine}
+                    onChange={(e) => handleSceneUpdate({ plotLine: e.target.value })}
+                    rows={1}
+                  />
+                </div>
+              </CardContent>
+            </Card>
 
           {/* Right Character Panel */}
           <div className="lg:h-[calc(100vh-120px)]">
