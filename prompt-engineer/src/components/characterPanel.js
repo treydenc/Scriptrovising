@@ -17,6 +17,7 @@ import { ChevronDown } from "lucide-react";
 
 const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }) => {
   const [isDefaultCharacter, setIsDefaultCharacter] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Preset options for each side of each attribute
   const presetOptions = {
@@ -31,6 +32,29 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
     Relationships: {
       left: ["Distant", "Guarded", "Independent", "Solitary", "Detached"],
       right: ["Connected", "Open", "Dependent", "Social", "Attached"]
+    }
+  };
+
+  const handleSliderChange = (category, value) => {
+    onUpdate({
+      attributes: {
+        ...initialCharacter.attributes,
+        [category]: {
+          ...initialCharacter.attributes[category],
+          value: value[0]
+        }
+      }
+    });
+  };
+  
+  const handleSliderDragStart = () => {
+    setIsDragging(true);
+  };
+  
+  const handleSliderDragEnd = () => {
+    if (isDragging) {
+      onUpdate({ isSliderMovement: true });
+      setIsDragging(false);
     }
   };
 
@@ -140,6 +164,8 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
                 max={100}
                 defaultValue={[initialCharacter.responseLength || 50]}
                 onValueChange={(value) => onUpdate({ responseLength: value[0] })}
+                onPointerDown={handleSliderDragStart}
+                onPointerUp={handleSliderDragEnd}
                 className="py-2"
               />
             </div>
@@ -185,21 +211,15 @@ const CharacterPanel = ({ initialCharacter, onUpdate, onGenerate, isGenerating }
                   </div>
                   
                   <div className="relative">
-                    <Slider
-                      min={0}
-                      max={100}
-                      value={[data.value]}
-                      onValueChange={(value) => onUpdate({
-                        attributes: {
-                          ...initialCharacter.attributes,
-                          [category]: {
-                            ...data,
-                            value: value[0]
-                          }
-                        }
-                      })}
-                      className="my-4"
-                    />
+                  <Slider
+                    min={0}
+                    max={100}
+                    value={[data.value]}
+                    onValueChange={(value) => handleSliderChange(category, value)}
+                    onPointerDown={handleSliderDragStart}
+                    onPointerUp={handleSliderDragEnd}
+                    className="my-4"
+                  />
                     <motion.div 
                       className="text-xs text-slate-400 mt-1 text-center"
                       layout

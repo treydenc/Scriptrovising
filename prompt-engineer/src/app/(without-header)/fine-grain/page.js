@@ -28,11 +28,31 @@ export default function Home() {
     clearModeAndReturn
   } = useSessionData('finegrain');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [editingInitialText, setEditingInitialText] = useState(null);
   const router = useRouter();
+  const downloadButtonRef = useRef();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (sceneData && sceneData.scene && 
+      (!sceneData.scene.hasOwnProperty('editCount') || 
+       !sceneData.scene.hasOwnProperty('sliderCount') ||
+       !sceneData.scene.hasOwnProperty('generateCount'))
+    ) {
+      updateSceneData({
+        ...sceneData,
+        scene: {
+          ...sceneData.scene,
+          editCount: 0,
+          sliderCount: 0,
+          generateCount: 0
+        }
+      });
+    }
+  }, [sceneData, updateSceneData]);
 
   useEffect(() => {
     if (dialogueEndRef.current && sceneData?.scene?.dialogueLines) {
@@ -40,17 +60,47 @@ export default function Home() {
     }
   }, [sceneData?.scene?.dialogueLines]);
 
+  const handleBackAndClear = () => {
+    // Trigger download first if there's content
+    if (sceneData.scene.dialogueLines.length > 0) {
+      downloadButtonRef.current?.click();
+    }
+    setTimeout(() => {
+      clearModeAndReturn();
+    }, 100);
+  };
+
   const handleCharacterUpdate = (characterId, updates) => {
-    updateSceneData({
-      ...sceneData,
-      characters: {
-        ...sceneData.characters,
-        [characterId]: {
-          ...sceneData.characters[characterId],
-          ...updates
+    // Check if this update is from a slider movement
+    if (updates.isSliderMovement) {
+      delete updates.isSliderMovement;
+      updateSceneData({
+        ...sceneData,
+        characters: {
+          ...sceneData.characters,
+          [characterId]: {
+            ...sceneData.characters[characterId],
+            ...updates
+          }
+        },
+        scene: {
+          ...sceneData.scene,
+          sliderCount: (sceneData.scene.sliderCount || 0) + 1
         }
-      }
-    });
+      });
+    } else {
+      // Regular character update
+      updateSceneData({
+        ...sceneData,
+        characters: {
+          ...sceneData.characters,
+          [characterId]: {
+            ...sceneData.characters[characterId],
+            ...updates
+          }
+        }
+      });
+    }
   };
 
     // Add this check at the top level
@@ -86,6 +136,23 @@ export default function Home() {
       }
     });
   };
+
+  const handleDialogueEditStart = (index) => {
+    setEditingInitialText(sceneData.scene.dialogueLines[index].text);
+  };
+
+  const handleDialogueEditEnd = (index, newText) => {
+    if (editingInitialText !== null && editingInitialText !== newText) {
+      updateSceneData({
+        ...sceneData,
+        scene: {
+          ...sceneData.scene,
+          editCount: (sceneData.scene.editCount || 0) + 1
+        }
+      });
+    }
+    setEditingInitialText(null);
+  };
   
   const handleDeleteDialogue = (index) => {
     updateSceneData({
@@ -101,7 +168,7 @@ export default function Home() {
     try {
       setError(null);
       setIsGenerating(true);
-      
+
       const speakingCharacter = sceneData.characters[speakingCharacterId];
       const otherCharacterId = speakingCharacterId === 'character1' ? 'character2' : 'character1';
       const otherCharacter = sceneData.characters[otherCharacterId];
@@ -125,20 +192,21 @@ export default function Home() {
         dialogueHistory: recentDialogue // Add dialogue history
       });
   
-      updateSceneData({
-        ...sceneData,
-        scene: {
-          ...sceneData.scene,
-          dialogueLines: [...sceneData.scene.dialogueLines, {
-            character: speakingCharacterId,
-            text: dialogue,
-            timestamp: new Date().toLocaleTimeString([], { 
-              hour: '2-digit', 
-              minute: '2-digit' 
-            })
-          }]
-        }
-      });
+    updateSceneData({
+      ...sceneData,
+      scene: {
+        ...sceneData.scene,
+        generateCount: (sceneData.scene.generateCount || 0) + 1,
+        dialogueLines: [...sceneData.scene.dialogueLines, {
+          character: speakingCharacterId,
+          text: dialogue,
+          timestamp: new Date().toLocaleTimeString([], { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+          })
+        }]
+      }
+    });
     } catch (error) {
       setError(error.message);
     } finally {
@@ -157,26 +225,33 @@ export default function Home() {
       {/* Navigation Bar - Responsive */}
       <div className="sticky top-0 z-50 bg-transparent backdrop-blur-sm p-4">
         <div className="container max-w-[1920px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <Button
-            onClick={clearModeAndReturn}
-            variant="ghost"
-            className="text-gray-400 hover:text-gray-200"
-          >
-            ← Back & Clear
-          </Button>
+        <Button
+          onClick={handleBackAndClear}
+          variant="ghost"
+          className="text-gray-400 hover:text-gray-200"
+        >
+          ← Back & Clear
+        </Button>
           
-          <CardHeader className="flex-none space-y-2 sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2">
-            <h2 className="text-4xl sm:text-3xl font-bold text-gray-200 text-center font-['Caslon'] pt-2">
-              SCRIPT
-            </h2>
+          <CardHeader className="py-2 flex flex-col items-center gap-2">
+            <h2 className="font-['Caslon'] text-3xl font-bold text-gray-200">SCRIPT</h2>
+            <div className="bg-black/30 px-3 py-1 rounded-lg">
+              <span className="text-gray-200 font-['Future'] text-sm">
+                Edits: <span className="font-bold">{sceneData.scene.editCount || 0}</span>
+              </span>
+            </div>
           </CardHeader>
 
           <DownloadButton 
+            ref={downloadButtonRef}
             dialogueContent={sceneData.scene.dialogueLines.map(line => ({
               character: sceneData.characters[line.character].name,
               dialogue: line.text
             }))}
             sceneDescription={sceneData.scene.description}
+            editCount={sceneData.scene.editCount || 0}
+            sliderCount={sceneData.scene.sliderCount || 0}
+            generateCount={sceneData.scene.generateCount || 0}
           />
         </div>
       </div>
@@ -237,9 +312,11 @@ export default function Home() {
                             </div>
                             <div className="relative">
                               <div className="px-4 sm:px-16">
-                                <AutoResizeTextArea
+                              <AutoResizeTextArea
                                   value={line.text}
                                   onChange={handleDialogueEdit}
+                                  onFocus={() => handleDialogueEditStart(index)}
+                                  onBlur={(newText) => handleDialogueEditEnd(index, newText)}
                                   index={index}
                                 />
                               </div>

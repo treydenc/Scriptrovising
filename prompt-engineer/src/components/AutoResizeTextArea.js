@@ -1,24 +1,20 @@
-// src/components/AutoResizeTextArea.jsx
-import React, { useEffect, useRef } from 'react';
+// components/AutoResizeTextArea.js
+import React, { useRef, useEffect } from 'react';
 
-const AutoResizeTextArea = ({ value, onChange, index, onDelete }) => {
+const AutoResizeTextArea = ({ value, onChange, onFocus, onBlur, index }) => {
   const textareaRef = useRef(null);
 
-  const adjustHeight = () => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-    
-    // Reset height to auto first to get the correct scrollHeight
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-  };
-
   useEffect(() => {
-    adjustHeight();
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    }
   }, [value]);
 
   const handleChange = (e) => {
-    onChange(index, e.target.value);
+    if (onChange) {
+      onChange(index, e.target.value);
+    }
   };
 
   return (
@@ -26,10 +22,11 @@ const AutoResizeTextArea = ({ value, onChange, index, onDelete }) => {
       ref={textareaRef}
       value={value}
       onChange={handleChange}
-      className="w-full text-md bg-transparent text-gray-200 leading-relaxed 
-               focus:outline-none focus:bg-black/20 p-2 rounded resize-none 
-               font-['Courier'] overflow-hidden"
-      style={{ minHeight: '1.5em' }}
+      onFocus={() => onFocus && onFocus()}
+      onBlur={(e) => onBlur && onBlur(e.target.value)}
+      className="w-full text-md bg-transparent text-gray-200 leading-relaxed focus:outline-none 
+        focus:bg-black/20 p-2 rounded resize-none font-['Courier']"
+      rows={1}
     />
   );
 };
